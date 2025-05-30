@@ -21,7 +21,7 @@ spec:
         - name: PORT
           value: "3003"
         - name: MONGO_URI
-          value: "mongodb://mongodb:27017/taskmaster"
+          value: "mongodb://mongodb:27018/taskmaster"
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
