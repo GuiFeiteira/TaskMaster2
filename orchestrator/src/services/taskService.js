@@ -2,6 +2,12 @@ const axios = require('axios');
 
 const TASK_URL = 'http://task-service:3003';
 
+const handleError = (err, res, defaultMessage) => {
+  const status = err.response?.status || 500;
+  const message = err.response?.data?.error || defaultMessage;
+  res.status(status).json({ error: message });
+};
+
 exports.getAllTasks = async (req, res) => {
   try {
     const response = await axios.get(`${TASK_URL}/tasks`, {
@@ -9,7 +15,7 @@ exports.getAllTasks = async (req, res) => {
     });
     res.json(response.data);
   } catch (err) {
-    res.status(err.response?.status || 500).json(err.response?.data || { error: 'Erro ao obter tarefas' });
+    handleError(err, res, 'Erro ao obter tarefas');
   }
 };
 
@@ -20,7 +26,7 @@ exports.createTask = async (req, res) => {
     });
     res.json(response.data);
   } catch (err) {
-    res.status(err.response?.status || 500).json(err.response?.data || { error: 'Erro ao criar tarefa' });
+    handleError(err, res, 'Erro ao criar tarefa');
   }
 };
 
@@ -31,7 +37,7 @@ exports.updateTask = async (req, res) => {
     });
     res.json(response.data);
   } catch (err) {
-    res.status(err.response?.status || 500).json(err.response?.data || { error: 'Erro ao atualizar tarefa' });
+    handleError(err, res, 'Erro ao atualizar tarefa');
   }
 };
 
@@ -42,7 +48,7 @@ exports.deleteTask = async (req, res) => {
     });
     res.json(response.data);
   } catch (err) {
-    res.status(err.response?.status || 500).json(err.response?.data || { error: 'Erro ao eliminar tarefa' });
+    handleError(err, res, 'Erro ao eliminar tarefa');
   }
 };
 

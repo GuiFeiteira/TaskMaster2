@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const userService = require('../services/userService');
-const authMiddleware = require('../middleware/authMiddleware');
+const { verifyToken } = require('../middlewares/auth.middleware');
 
-// Public routes
 router.post('/', userService.createUser);
 
-// Protected routes
-router.use(authMiddleware.verifyToken);
+router.use(verifyToken);
 router.get('/', userService.getAllUsers);
 router.put('/:id', userService.updateUser);
 router.delete('/:id', userService.deleteUser);

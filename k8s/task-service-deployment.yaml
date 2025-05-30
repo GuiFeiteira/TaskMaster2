@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: task-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: task-service
@@ -31,6 +31,7 @@ spec:
           value: "http://auth-service:3001"
         - name: USER_SERVICE_URL
           value: "http://user-service:3002"
+        imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1
 kind: Service

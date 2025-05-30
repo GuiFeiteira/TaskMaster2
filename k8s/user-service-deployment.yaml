@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: user-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: user-service
@@ -27,6 +27,7 @@ spec:
             secretKeyRef:
               name: app-secrets
               key: jwt-secret
+        imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1
 kind: Service

@@ -74,4 +74,16 @@ const remove = async (req, res, next) => {
   }
 };
 
-module.exports = { create, list, get, update, remove };
+const getProfile = async (req, res, next) => {
+  try {
+    const user = await userService.getUserById(req.user.userId);
+    res.json(user);
+  } catch (err) {
+    if (err.message === 'Utilizador não encontrado') {
+      return res.status(404).json({ error: err.message });
+    }
+    next(err);
+  }
+};
+
+module.exports = { create, list, get, update, remove, getProfile };

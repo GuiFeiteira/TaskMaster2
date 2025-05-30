@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: orchestrator
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: orchestrator
@@ -26,6 +26,7 @@ spec:
           value: "http://user-service:3002"
         - name: TASK_SERVICE_URL
           value: "http://task-service:3003"
+        imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1
 kind: Service
