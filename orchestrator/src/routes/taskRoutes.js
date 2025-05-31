@@ -11,4 +11,7 @@ router.post('/', taskService.createTask);
 router.put('/:id', taskService.updateTask);
 router.delete('/:id', taskService.deleteTask);
 
+// Rota para buscar uma única tarefa por ID
+router.get('/:id', taskService.getTaskById);
+
 module.exports = router;

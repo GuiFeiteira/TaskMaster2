@@ -3,15 +3,22 @@ kind: Ingress
 metadata:
   name: taskmaster-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /api(/|$)(.*)
         pathType: Prefix
         backend:
           service:
             name: orchestrator
             port:
-              number: 3000 
+              number: 3000
+      - path: /()(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: web-ui
+            port:
+              number: 80 

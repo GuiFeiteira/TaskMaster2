@@ -52,3 +52,15 @@ exports.deleteTask = async (req, res) => {
   }
 };
 
+// Função para buscar uma única tarefa por ID
+exports.getTaskById = async (req, res) => {
+  try {
+    const response = await axios.get(`${TASK_URL}/tasks/${req.params.id}`, {
+      headers: { Authorization: req.headers.authorization }
+    });
+    res.json(response.data);
+  } catch (err) {
+    handleError(err, res, 'Erro ao obter tarefa por ID');
+  }
+};
+
