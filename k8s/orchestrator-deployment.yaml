@@ -14,25 +14,30 @@ spec:
     spec:
       containers:
       - name: orchestrator
-        image: orchestrator:latest
+        image: taskmaster2-orchestrator:latest
         ports:
         - containerPort: 3000
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
         env:
         - name: PORT
           value: "3000"
-        - name: MONGO_URI
-          value: "mongodb://mongodb:27018/taskmaster"
-        - name: JWT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: jwt-secret
         - name: AUTH_SERVICE_URL
           value: "http://auth-service:3001"
         - name: USER_SERVICE_URL
           value: "http://user-service:3002"
         - name: TASK_SERVICE_URL
           value: "http://task-service:3003"
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: jwt-secret
         imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1
@@ -43,6 +48,6 @@ spec:
   selector:
     app: orchestrator
   ports:
-  - port: 80
+  - port: 3000
     targetPort: 3000
-  type: LoadBalancer 
+  type: ClusterIP 

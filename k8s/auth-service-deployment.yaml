@@ -14,14 +14,21 @@ spec:
     spec:
       containers:
       - name: auth-service
-        image: auth-service:latest
+        image: taskmaster2-auth-service:latest
         ports:
         - containerPort: 3001
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
         env:
         - name: PORT
           value: "3001"
         - name: MONGO_URI
-          value: "mongodb://mongodb:27018/taskmaster"
+          value: "mongodb://mongodb:27017/taskmaster"
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
