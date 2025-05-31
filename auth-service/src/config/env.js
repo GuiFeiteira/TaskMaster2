@@ -11,6 +11,6 @@ const decodeBase64 = (str) => {
 
 module.exports = {
   port: process.env.PORT || 3001,
-  mongoUri: process.env.MONGO_URI || 'mongodb://mongodb:27017/taskmaster',
+  mongoUri: process.env.MONGO_URI || 'mongodb://localhost:27017/taskmaster',
   JWT_SECRET: process.env.JWT_SECRET || 'supersecretosecretkeymegacomplicado'
 };

@@ -5,7 +5,7 @@ dotenv.config();
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/taskmaster');
     console.log('Conectado ao MongoDB');
   } catch (err) {
     console.error('Erro ao ligar à base de dados:', err);
