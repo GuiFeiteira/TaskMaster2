@@ -10,4 +10,7 @@ router.get('/', userService.getAllUsers);
 router.put('/:id', userService.updateUser);
 router.delete('/:id', userService.deleteUser);
 
+// Rota para buscar um único usuário por ID
+router.get('/:id', userService.getUserById);
+
 module.exports = router;
